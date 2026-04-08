@@ -1143,11 +1143,10 @@ connect(ui->actionRestart_Proxy, &QAction::triggered, this, [=,this] {
         });
     }
 
-    if (Configs::dataManager->settingsRepo->sub_auto_update >= 30) {
-        QTimer::singleShot(0, this, [] {
-            UI_update_all_groups(true);
-        });
-    }
+    // Force refresh all subscription groups once startup settles.
+    QTimer::singleShot(3000, this, [this] {
+        UI_update_all_groups(false);
+    });
 
     if (!Configs::dataManager->settingsRepo->flag_tray) show();
 
