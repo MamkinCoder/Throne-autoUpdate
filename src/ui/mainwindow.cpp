@@ -1143,6 +1143,12 @@ connect(ui->actionRestart_Proxy, &QAction::triggered, this, [=,this] {
         });
     }
 
+    if (Configs::dataManager->settingsRepo->sub_auto_update >= 30) {
+        QTimer::singleShot(0, this, [] {
+            UI_update_all_groups(true);
+        });
+    }
+
     if (!Configs::dataManager->settingsRepo->flag_tray) show();
 
     ui->data_view->setStyleSheet("background: transparent; border: none;");
