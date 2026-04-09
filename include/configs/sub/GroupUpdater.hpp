@@ -56,3 +56,4 @@ namespace Subscription {
 } // namespace Subscription
 
 void UI_update_all_groups(bool onlyAllowed = false);
+bool UI_update_all_groups_is_updating();
