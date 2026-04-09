@@ -395,6 +395,8 @@ private:
 
     void iptest_current_group(const QList<int>& profileIDs);
 
+    void check_all_vless_profiles();
+
     void stopTests();
 
     void runURLTest(const QString& config, const QString& xrayConfig, const QStringList& xrayFullConfigs, bool useDefault, const QStringList& outboundTags, const QMap<QString, int>& tag2entID, int entID = -1);
