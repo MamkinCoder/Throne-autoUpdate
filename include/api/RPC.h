@@ -50,6 +50,8 @@ namespace API {
 
         bool CheckNaive(bool* rpcOK) const;
 
+        libcore::DebugCheckResult DebugCheck(bool *rpcOK, const libcore::DebugCheckRequest &request);
+
     private:
         std::function<std::unique_ptr<QtGrpc::Http2GrpcChannelPrivate>()> make_grpc_channel;
         std::unique_ptr<QtGrpc::Http2GrpcChannelPrivate> default_grpc_channel;
