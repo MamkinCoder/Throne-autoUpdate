@@ -13,6 +13,7 @@
 
 
 #include "include/global/Configs.hpp"
+#include "include/sys/DPICheck.hpp"
 
 #include "include/ui/mainwindow_interface.h"
 
@@ -229,6 +230,8 @@ int main(int argc, char* argv[]) {
         server.close();
         QLocalServer::removeServer(serverName);
     });
+
+    DpiCheck::TryRunDaily();
 
 #ifdef Q_OS_LINUX
     signal(SIGTERM, signal_handler);
