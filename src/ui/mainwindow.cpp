@@ -393,11 +393,9 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWi
     connect(ui->actionTraffic_Stats, &QAction::triggered, this, [=]() {
         USE_DIALOG(DialogTrafficStats)
     });
-    connect(ui->actionCheck_For_Update, &QAction::triggered, this, [=,this] { runOnNewThread([=,this] { CheckUpdate(); }); });
-    if (!QFile::exists(QApplication::applicationDirPath() + "/updater") && !QFile::exists(QApplication::applicationDirPath() + "/updater.exe"))
-    {
-        ui->actionCheck_For_Update->setDisabled(true);
-    }
+    // Keep client self-update hidden in this fork. Dynamic config/subscription updates stay available below.
+    ui->actionCheck_For_Update->setVisible(false);
+    ui->actionCheck_For_Update->setDisabled(true);
     connect(ui->toolButton_update_subs, &QToolButton::clicked, this, [=,this] {
         MW_show_log(tr("[UpdateConf] Button clicked."));
         // For groups that have profiles but no subscription URL, ask the user once.
