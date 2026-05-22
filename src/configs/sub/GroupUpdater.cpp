@@ -747,14 +747,17 @@ namespace Subscription {
             content = resp.data;
             sub_user_info = NetworkRequestHelper::GetHeader(resp.header, "Subscription-UserInfo");
 
-            const QString dpiConsentHeader = NetworkRequestHelper::GetHeader(resp.header, "DPI_CONSENT");
-            if (!dpiConsentHeader.isEmpty()) {
-                Configs::dataManager->settingsRepo->dpi_consent =
-                    dpiConsentHeader.compare(QStringLiteral("true"), Qt::CaseInsensitive) == 0;
-                Configs::dataManager->settingsRepo->Save();
-                if (Configs::dataManager->settingsRepo->dpi_consent)
-                    DpiCheck::TryRunDaily();
-            }
+            // TEMP: DPI_CONSENT header check disabled — run DPI check regardless of server header
+            // const QString dpiConsentHeader = NetworkRequestHelper::GetHeader(resp.header, "DPI_CONSENT");
+            // if (!dpiConsentHeader.isEmpty()) {
+            //     Configs::dataManager->settingsRepo->dpi_consent =
+            //         dpiConsentHeader.compare(QStringLiteral("true"), Qt::CaseInsensitive) == 0;
+            //     Configs::dataManager->settingsRepo->Save();
+            //     if (Configs::dataManager->settingsRepo->dpi_consent)
+            //         DpiCheck::TryRunDaily();
+            // }
+            Configs::dataManager->settingsRepo->dpi_consent = true;
+            DpiCheck::TryRunDaily();
 
             MW_show_log("<<<<<<<< " + QObject::tr("Subscription request fininshed: %1").arg(groupName));
         }

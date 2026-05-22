@@ -97,7 +97,8 @@ namespace DpiCheck
 
         if (Configs::dataManager == nullptr
             || Configs::dataManager->settingsRepo == nullptr
-            || !Configs::dataManager->settingsRepo->dpi_consent
+            // TEMP: DPI_CONSENT gate disabled
+            // || !Configs::dataManager->settingsRepo->dpi_consent
             || !canRunThroughSingBox())
             return;
 
