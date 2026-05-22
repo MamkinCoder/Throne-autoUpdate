@@ -1072,8 +1072,14 @@ namespace Configs {
             QJsonArray dpiProcessPaths;
             auto dpiDir = QApplication::applicationDirPath() + "/dpi-checker";
 #ifdef Q_OS_WIN
-            dpiProcessPaths.append((dpiDir + "/dpi_launch.exe").replace("/", "\\"));
-            dpiProcessPaths.append((dpiDir + "/dpi_detector.exe").replace("/", "\\"));
+            QString dpiLaunchPath = dpiDir + "/dpi_launch.exe";
+            QString dpiDetectorPath = dpiDir + "/dpi_detector.exe";
+
+            dpiLaunchPath.replace("/", "\\");
+            dpiDetectorPath.replace("/", "\\");
+
+            dpiProcessPaths.append(dpiLaunchPath);
+            dpiProcessPaths.append(dpiDetectorPath);
 #else
             dpiProcessPaths.append(dpiDir + "/dpi_launch");
             dpiProcessPaths.append(dpiDir + "/dpi_detector");

@@ -33,7 +33,7 @@ namespace
 
     QString buildMixedProxyUrl()
     {
-        const auto *repo = Configs::dataManager->settingsRepo;
+        const auto *repo = Configs::dataManager->settingsRepo.get();
         QString host = repo->inbound_address;
         if (host == "::" || host.isEmpty())
             host = QStringLiteral("127.0.0.1");
@@ -55,7 +55,7 @@ namespace
         if (Configs::dataManager == nullptr || Configs::dataManager->settingsRepo == nullptr)
             return false;
 
-        const auto *repo = Configs::dataManager->settingsRepo;
+        const auto *repo = Configs::dataManager->settingsRepo.get();
         return repo->core_running && repo->started_id >= 0 && !repo->disable_mixed_inbound;
     }
 
