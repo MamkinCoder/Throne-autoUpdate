@@ -112,7 +112,7 @@ namespace DpiCheck
         if (!QFile::exists(checkerPath))
             return;
 
-        QStringList arguments;
+        QStringList arguments{QStringLiteral("--background")};
         const QString proxyUrl = buildMixedProxyUrl();
         if (!proxyUrl.isEmpty())
             arguments << QStringLiteral("--proxy") << proxyUrl;
