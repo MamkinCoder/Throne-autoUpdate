@@ -58,6 +58,8 @@ set(PROJECT_SOURCES
 
         src/main.cpp
         src/global/Configs.cpp
+        include/global/ShadowlosBootstrap.hpp
+        src/global/ShadowlosBootstrap.cpp
         src/global/Utils.cpp
         include/global/PeriodicRunner.hpp
         src/global/PeriodicRunner.cpp
