@@ -90,6 +90,7 @@
 #include <3rdparty/qv2ray/v2/proxy/QvProxyConfigurator.hpp>
 #include <include/global/HTTPRequestHelper.hpp>
 #include "include/global/DeviceDetailsHelper.hpp"
+#include "include/global/ShadowlosBootstrap.hpp"
 
 #include "include/sys/macos/MacOS.h"
 
@@ -1173,6 +1174,15 @@ connect(ui->actionRestart_Proxy, &QAction::triggered, this, [=,this] {
     QTimer::singleShot(3000, this, [this] {
         UI_update_all_groups(false);
     });
+
+    // A Shadowlos archive ships with TUN pre-selected. Deferred to here rather
+    // than done in ApplyBootstrap because enabling it may raise a privilege
+    // prompt, which needs a window to parent onto.
+    if (Shadowlos::WantsTunOnStart() && !Configs::dataManager->settingsRepo->spmode_vpn) {
+        QTimer::singleShot(0, this, [this] {
+            set_spmode_vpn(true);
+        });
+    }
 
     if (!Configs::dataManager->settingsRepo->flag_tray) show();
 
